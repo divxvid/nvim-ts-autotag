@@ -16,6 +16,7 @@ M.tbl_filetypes = {
     'htmldjango',
     'eruby',
     'templ',
+    'heex',
 }
 
 -- stylua: ignore
@@ -105,11 +106,27 @@ local TEMPL_TAG = {
     skip_tag_pattern = { "quoted_attribute_value", "tag_end" },
 }
 
+-- stylua: ignore
+local HEEX_TAG = {
+    filetypes = {
+        "heex",
+    },
+    start_tag_pattern      = { 'start_tag', 'start_component' },
+    start_name_tag_pattern = { 'tag_name', 'component_name' },
+    end_tag_pattern        = { 'end_tag', 'end_component' },
+    end_name_tag_pattern   = { 'tag_name', 'component_name' },
+    close_tag_pattern      = { 'erroneous_end_tag' },
+    close_name_tag_pattern = { 'erroneous_end_tag_name' },
+    element_tag            = { 'tag', 'component' },
+    skip_tag_pattern       = { 'quoted_attribute_value', 'end_tag' },
+}
+
 local all_tag = {
     HBS_TAG,
     SVELTE_TAG,
     JSX_TAG,
     TEMPL_TAG,
+    HEEX_TAG,
 }
 M.enable_rename = true
 M.enable_close = true
